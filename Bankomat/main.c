@@ -12,6 +12,7 @@
 
 const int BASIC_BAL=100000;
 const int cellsNum=5000;
+const int generalAttempt=2;
 
 int main() {
     int pinArray[cellsNum];
@@ -22,7 +23,7 @@ int main() {
     int adminSelect, userSelect;
     int adminPin=1111;
     int ok, enterPin;
-    int countDigits=0;
+    int countDigits=0, countAttempt=0;
     
     srand(time(NULL));
     
@@ -30,18 +31,17 @@ int main() {
     for (int i = 0; i < cellsNum; i++){
         randPin = rand() % cellsNum;
         pinArray[i] = 1000 + randPin;
-       // printf("%d: ", pinArray[i]);
+        //printf("%d: ", pinArray[i]);
     }
     
     //fill array with random balance
     for ( int i = 0; i < cellsNum; i ++){
         balArray[i]  = BASIC_BAL + i;
-       // printf("%d ", balArray[i]);
+        // printf("%d ", balArray[i]);
     }
     
     // user can enter only three times valid PIN
-    for (int i = 0; i < 3; i ++){
-        
+    for (int countAttempt = 0; countAttempt <= 2; countAttempt++){
         for(;;){
             printf("Enter PIN kod: ");
             ok=scanf("%d", &enterPin);
@@ -60,11 +60,17 @@ int main() {
             countDigits = 1 + (int)log10(enterPin);
             if ((countDigits < 4) || (countDigits > 4)){
                 printf("Entered PIN has incorrect length. PIN should be 4 digits\n");
+                continue;
             }
             break;
         }
-        break;
+        //check on 3 attepts
+        if (countAttempt==generalAttempt){
+            printf("\n-------->BYE! Unfortunately, your card was rejected<--------\n");
+            break;
+        }
     }
+    
     
     //check for roles
     //ADMIN role
@@ -147,7 +153,6 @@ int main() {
                     default:
                         printf("\nERROR - Pls make the right choice\n");
                         goto againUser;
-                        
                 }
                 break;
             }
