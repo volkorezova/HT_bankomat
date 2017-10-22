@@ -30,13 +30,13 @@ int main() {
     for (int i = 0; i < cellsNum; i++){
         randPin = rand() % cellsNum;
         pinArray[i] = 1000 + randPin;
-        printf("%d: ", pinArray[i]);
+       // printf("%d: ", pinArray[i]);
     }
     
     //fill array with random balance
     for ( int i = 0; i < cellsNum; i ++){
         balArray[i]  = BASIC_BAL + i;
-        printf("%d ", balArray[i]);
+       // printf("%d ", balArray[i]);
     }
     
     // user can enter only three times valid PIN
