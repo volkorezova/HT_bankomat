@@ -41,7 +41,7 @@ int main() {
     }
     
     // user can enter only three times valid PIN
-    for (int countAttempt = 0; countAttempt <= 2; countAttempt++){
+    for (int countAttempt = 0; countAttempt <= GENERAL_ATTEMPT; countAttempt++){
         for(;;){
             printf("Enter PIN kod: ");
             ok=scanf("%d", &enteredPin);
