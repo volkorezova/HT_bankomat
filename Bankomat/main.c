@@ -11,10 +11,11 @@
 #include <time.h>
 
 const int BASIC_BAL=100000;
+const int cellsNum=5000;
 
 int main() {
-    int pinArray[5000];
-    int balArray[5000];
+    int pinArray[cellsNum];
+    int balArray[cellsNum];
     int randPin = 0;
     int indexForBalance=0;
     int sum=0, i=0, j=0;
@@ -26,14 +27,14 @@ int main() {
     srand(time(NULL));
     
     //fill array with random pin
-    for (int i = 0; i < 5000; i++){
-        randPin = rand()%5000;
+    for (int i = 0; i < cellsNum; i++){
+        randPin = rand() % cellsNum;
         pinArray[i] = 1000 + randPin;
         printf("%d: ", pinArray[i]);
     }
     
     //fill array with random balance
-    for ( int i = 0; i < 5000; i ++){
+    for ( int i = 0; i < cellsNum; i ++){
         balArray[i]  = BASIC_BAL + i;
         printf("%d ", balArray[i]);
     }
@@ -79,7 +80,7 @@ int main() {
                 // option of view of all cells, PINs, balances
             case 1:
                 printf("View all information about cells\n");
-                for (i = 0, j = 0; i < 5000; i++, j++){
+                for (i = 0, j = 0; i < cellsNum; i++, j++){
                     printf("Cell number:%d, PIN: %d, Balance:%d \n", i+1, pinArray[i], balArray[j]);
                 }
                 break;
@@ -87,7 +88,7 @@ int main() {
             case 2:
                 printf("Balances for all cards were cleared:\n");
                 memset (balArray, 0, sizeof(balArray));
-                for (i = 0, j = 0; i < 5000; i++, j++){
+                for (i = 0, j = 0; i < cellsNum; i++, j++){
                     printf("Cell number:%d, PIN: %d, Balance:%d \n", i+1, pinArray[i], balArray[j]);
                 }
                 break;
@@ -101,7 +102,7 @@ int main() {
         }
     } else{
         //USER role
-        for (i = 0; i < 5000; i++){
+        for (i = 0; i < cellsNum; i++){
             if(enterPin == pinArray[i]){
                 indexForBalance = i;
             againUser:printf("You are USER! \n");
