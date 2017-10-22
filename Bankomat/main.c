@@ -31,7 +31,7 @@ int main() {
     for (int i = 0; i < cellsNum; i++){
         randPin = rand() % cellsNum;
         pinArray[i] = 1000 + randPin;
-        //printf("%d: ", pinArray[i]);
+       // printf("%d: ", pinArray[i]);
     }
     
     //fill array with random balance
@@ -46,6 +46,17 @@ int main() {
             printf("Enter PIN kod: ");
             ok=scanf("%d", &enterPin);
             fpurge(stdin);
+            
+            if (enterPin==adminPin)
+                goto againAdmin;
+            
+            for (i = 0; i < cellsNum; i++){
+                if(enterPin == pinArray[i]){
+                    indexForBalance = i;
+                    goto againUser;
+                }
+            }
+                    
             
             if (!ok){
                 printf("It's a string. Try again\n");
@@ -111,7 +122,7 @@ int main() {
         for (i = 0; i < cellsNum; i++){
             if(enterPin == pinArray[i]){
                 indexForBalance = i;
-            againUser:printf("You are USER! \n");
+            againUser:printf("\nYou are USER! \n");
                 printf("Options that you have:\n");
                 printf("1: View balance of YOUR card \n");
                 printf("2: Add money to card balance \n");
@@ -132,7 +143,7 @@ int main() {
                         printf("Pls enter sum for adding to your balance: ");
                         scanf("%d", &sum);
                         fpurge(stdin);
-                        printf("---- Cell number:%d, PIN: %d, Balance:%d(added %d) ---- \n", i+1, pinArray[indexForBalance], balArray[indexForBalance]+sum, sum);
+                        printf("---- Cell number:%d, PIN: %d, Initial balance: %d, New balance:%d(added %d) ---- \n", i+1, pinArray[indexForBalance], balArray[indexForBalance], balArray[indexForBalance]+sum, sum);
                         break;
                         
                         // take money from card
@@ -144,7 +155,7 @@ int main() {
                             printf("!!!!!You can't take money more than you have!!!!!\n");
                             continue;
                         }
-                        printf("---- Cell number:%d, PIN: %d, Balance:%d(took %d) ---- \n", i+1, pinArray[i], balArray[j]-sum, sum);
+                        printf("---- Cell number:%d, PIN: %d, Initial balance: %d, New balance:%d(took %d) ---- \n", i+1, pinArray[i], balArray[j], balArray[j]-sum, sum);
                         break;
                         
                         // exit from bankomat
