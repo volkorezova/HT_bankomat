@@ -155,6 +155,10 @@ int main() {
                             printf("!!!!!You can't take money more than you have!!!!!\n");
                             continue;
                         }
+                        if (sum <= 0){
+                            printf("Incorrect value for taking money\n");
+                            continue;
+                        }
                         printf("---- Cell number:%d, PIN: %d, Initial balance: %d, New balance:%d(took %d) ---- \n", i+1, pinArray[i], balanceArray[j], balanceArray[j]-sum, sum);
                         break;
                         
